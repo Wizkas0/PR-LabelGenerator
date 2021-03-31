@@ -13,3 +13,23 @@ try {
 } catch (error) {
   core.setFailed(error.message);
 }
+
+function genLabels(payload, permitted_labels){
+  var labels = [];
+  const title = payload.title;
+  for (label in permitted_labels){
+    if (title.includes(label)){
+      labels.push(label);
+    }
+  }
+  if (labels.length > 0){
+    return labels;
+  }
+  else{
+    return false;
+  }
+}
+
+function setLabels(labels, payload){
+  //get 
+}
