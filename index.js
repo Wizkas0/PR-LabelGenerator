@@ -2,16 +2,27 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
+  // Set label
+  const token = core.getInput("repo-token", { required: true });
+  const client = new github.GitHub(token);
+  const prNr = github.context.payload.pull_request.number;
+  // For test
+  const labels = ["question"];
+  await addLabel(client, prNr);
 } catch (error) {
   core.setFailed(error.message);
+}
+
+async function addLabel(client, prNr, labels) {
+  await client.issues.addLabels({
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo,
+    issue_number: prNumber,
+    labels: labels
+  })
 }
 
 function genLabels(payload, permitted_labels){
