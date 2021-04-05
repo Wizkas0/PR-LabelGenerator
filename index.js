@@ -1,6 +1,6 @@
 const core = require('@actions/core');
-const { context } = require('@actions/github');
-const { GitHub } = require('@actions/github/lib/utils');
+const { GitHub, context } = require('@actions/github');
+// const { GitHub } = require('@actions/github/lib/utils');
 
 const label_dict = {
   "test123": "test123", // For testing purposes
@@ -21,6 +21,7 @@ async function run() {
   // console.log(`The event payload: ${payload}`);
   // Set label
   const token = core.getInput("repo-token", { required: true });
+  console.log(token);
   const client = new GitHub(token);
   const prNr = context.payload.number;
   console.log(prNr);
@@ -41,6 +42,7 @@ async function addLabels(client, prNumber, prTitle) {
   if(labels.length === 0) {
     return;
   }
+  console.log(labels);
   await client.issues.addLabels({
     //owner: github.context.repo.owner
     owner: "mansand1",
