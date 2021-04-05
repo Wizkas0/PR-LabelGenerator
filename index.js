@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const { GitHub } = require('@actions/github/lib/utils');
 
 const label_dict = {
   "test123": "test123", // For testing purposes
@@ -19,7 +20,7 @@ try {
   console.log(`The event payload: ${payload}`);
   // Set label
   const token = core.getInput("repo-token", { required: true });
-  const client = new github.GitHub(token);
+  const client = new GitHub(token);
   const prNr = github.context.payload.pull_request.number;
   const prTitle = github.context.payload.pull_request.title;
   addLabels(client, prNr, prTitle);
