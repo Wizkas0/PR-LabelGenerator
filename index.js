@@ -24,7 +24,7 @@ async function run() {
   const client = new GitHub(token);
   const prNr = context.payload.number;
   console.log(prNr);
-  const prTitle = context.payload.title;
+  const prTitle = context.payload.pull_request.title;
   console.log(prTitle);
   console.log(context.repo.owner);
   console.log(context.repo.repo);
