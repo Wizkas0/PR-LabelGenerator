@@ -1,7 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-
-const label_dict = JSON.parse(core.getInput("keyword-dict", { required: true }))
+const key_word_dict_string = core.getInput("keyword-dict", { required: true })
+console.log(key_word_dict_string);
+const label_dict = JSON.parse(key_word_dict_string);
 //{
 //  "test123": "test123", // For testing purposes
 //  "presentation": "presentation",
