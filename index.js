@@ -1,17 +1,20 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const label_dict = {
-  "test123": "test123", // For testing purposes
-  "presentation": "presentation",
-  "essay": "essay",
-  "demo": "demo",
-  "executable tutorial": "tutorial",
-  "open-source contribution": "contribution_to_open_source",
-  "contribution to open-source": "contribution_to_open_source",
-  "course automation": "course_automation",
-  "feedback": "feedback",
-}
+const label_dict = core.getInput(keyword-dict, { required: true })
+//{
+//  "test123": "test123", // For testing purposes
+//  "presentation": "presentation",
+//  "essay": "essay",
+//  "demo": "demo",
+//  "executable tutorial": "tutorial",
+//  "open-source contribution": "contribution_to_open_source",
+//  "contribution to open-source": "contribution_to_open_source",
+//  "course automation": "course_automation",
+//  "feedback": "feedback",
+//  "proposal": "proposal",
+//  "submission": "submission",
+//}
 
 async function run() {
   try {

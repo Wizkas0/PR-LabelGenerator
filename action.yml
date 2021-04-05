@@ -3,6 +3,8 @@ description: 'Generate labels for pull requests'
 inputs:
   repo-token:
       description: 'The GITHUB_TOKEN repo secret'
+  keyword-dict:
+      description: 'A dictionary containing keywords and their corresponding labels'
 outputs:
   time: # id of output
     description: 'The time we greeted you'
