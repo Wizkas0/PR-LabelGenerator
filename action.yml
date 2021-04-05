@@ -2,7 +2,7 @@ name: 'Automatic Labels'
 description: 'Generate labels for pull requests'
 inputs:
   repo-token:
-      description: 'The GITHUB_TOKEN repository secret'
+      description: 'The GITHUB_TOKEN repo secret'
 outputs:
   time: # id of output
     description: 'The time we greeted you'
