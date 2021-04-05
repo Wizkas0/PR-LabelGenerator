@@ -1,6 +1,6 @@
 const core = require('@actions/core');
-const {GitHub, context} = require('@actions/github');
-// const { GitHub } = require('@actions/github/lib/utils');
+const { context } = require('@actions/github');
+const { GitHub } = require('@actions/github/lib/utils');
 
 const label_dict = {
   "test123": "test123", // For testing purposes
