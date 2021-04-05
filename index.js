@@ -23,7 +23,8 @@ try {
   const client = new GitHub(token);
   const prNr = github.context.payload.pull_request.number;
   const prTitle = github.context.payload.pull_request.title;
-  addLabels(client, prNr, prTitle);
+  //addLabels(client, prNr, prTitle);
+  addLabels(client, 5, prTitle);
 } catch (error) {
   core.setFailed(error.message);
 }
@@ -34,11 +35,12 @@ async function addLabels(client, prNumber, prTitle) {
     return;
   }
   await client.issues.addLabels({
-    owner: github.context.repo.owner,
-    repo: github.context.repo.name,
+    //owner: github.context.repo.owner
+    owner: "mansand1",
+    repo: "action-test",
     issue_number: prNumber,
     labels: labels
-  })
+  });
 }
 
 function genLabels(prTitle){
