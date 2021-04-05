@@ -26,7 +26,7 @@ async function run() {
   const client = new github.getOctokit(token);
   const prNr = github.context.payload.number;
   console.log(prNr);
-  const prTitle = context.payload.pull_request.title;
+  const prTitle = github.context.payload.pull_request.title;
   console.log(prTitle);
   console.log(github.context.repo.owner);
   console.log(github.context.repo.repo);
