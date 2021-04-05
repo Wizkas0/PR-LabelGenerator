@@ -23,7 +23,7 @@ async function run() {
   const token = core.getInput("repo-token", { required: true });
   console.log(token);
   // const client = new GitHub(token);
-  const client = new github.GitHub(token);
+  const client = new github.getOctokit(token);
   const prNr = github.context.payload.number;
   console.log(prNr);
   const prTitle = context.payload.pull_request.title;
