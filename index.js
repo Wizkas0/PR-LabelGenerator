@@ -22,7 +22,7 @@ try {
   const client = new github.GitHub(token);
   const prNr = github.context.payload.pull_request.number;
   const prTitle = github.context.payload.pull_request.title;
-  await addLabels(client, prNr, prTitle);
+  addLabels(client, prNr, prTitle);
 } catch (error) {
   core.setFailed(error.message);
 }
