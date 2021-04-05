@@ -29,7 +29,7 @@ async function run() {
   console.log(context.repo.owner);
   console.log(context.repo.repo);
   //addLabels(client, prNr, prTitle);
-  await addLabels(client, 5, prTitle);
+  await addLabels(client, 6, prTitle);
   } catch (error) {
   core.setFailed(error.message);
   console.log(error);
