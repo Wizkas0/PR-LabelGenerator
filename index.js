@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const { GitHub, context } = require('@actions/github');
+const github = require('@actions/github');
 // const { GitHub } = require('@actions/github/lib/utils');
 
 const label_dict = {
@@ -17,18 +17,19 @@ const label_dict = {
 async function run() {
   try {
   // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(context.payload, undefined, 2)
+  const payload = JSON.stringify(github.context.payload, undefined, 2)
   // console.log(`The event payload: ${payload}`);
   // Set label
   const token = core.getInput("repo-token", { required: true });
   console.log(token);
-  const client = new GitHub(token);
-  const prNr = context.payload.number;
+  // const client = new GitHub(token);
+  const client = new github.GitHub(token);
+  const prNr = github.context.payload.number;
   console.log(prNr);
   const prTitle = context.payload.pull_request.title;
   console.log(prTitle);
-  console.log(context.repo.owner);
-  console.log(context.repo.repo);
+  console.log(github.context.repo.owner);
+  console.log(github.context.repo.repo);
   //addLabels(client, prNr, prTitle);
   await addLabels(client, 6, prTitle);
   } catch (error) {
