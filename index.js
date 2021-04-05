@@ -14,7 +14,7 @@ const label_dict = {
   "feedback": "feedback",
 }
 
-(async () => {
+async function run() {
   try {
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(context.payload, undefined, 2)
@@ -33,7 +33,7 @@ const label_dict = {
   } catch (error) {
   core.setFailed(error.message);
   }
-})();
+}
 
 async function addLabels(client, prNumber, prTitle) {
   const labels = genLabels(prTitle);
@@ -63,3 +63,5 @@ function genLabels(prTitle){
 function setLabels(labels, payload){
   //get 
 }
+
+run();
