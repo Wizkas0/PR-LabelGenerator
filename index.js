@@ -35,7 +35,7 @@ async function addLabels(client, prNumber, prTitle) {
   }
   await client.issues.addLabels({
     owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
+    repo: github.context.repo.name,
     issue_number: prNumber,
     labels: labels
   })
