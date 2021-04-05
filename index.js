@@ -22,6 +22,7 @@ async function run() {
   // Set label
   const token = core.getInput("repo-token", { required: true });
   const client = new GitHub(token);
+  console.log(client);
   const prNr = context.payload.number;
   console.log(prNr);
   const prTitle = context.payload.pull_request.title;
