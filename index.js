@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const label_dict = core.getInput(keyword-dict, { required: true })
+const label_dict = JSON.parse(core.getInput("keyword-dict", { required: true }))
 //{
 //  "test123": "test123", // For testing purposes
 //  "presentation": "presentation",
@@ -18,6 +18,7 @@ const label_dict = core.getInput(keyword-dict, { required: true })
 
 async function run() {
   try {
+  console.log(label_dict);
   const token = core.getInput("repo-token", { required: true });
   const client = new github.getOctokit(token);
   const prNr = github.context.payload.number;
