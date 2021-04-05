@@ -29,7 +29,7 @@ try {
 }
 
 async function addLabels(client, prNumber, prTitle) {
-  const labels = genLabels();
+  const labels = genLabels(prTitle);
   if(labels.length === 0) {
     return;
   }
