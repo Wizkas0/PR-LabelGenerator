@@ -1,6 +1,18 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
+const label_dict = {
+  "test123": "test123", // For testing purposes
+  "presentation": "presentation",
+  "essay": "essay",
+  "demo": "demo",
+  "executable tutorial": "tutorial",
+  "open-source contribution": "contribution_to_open_source",
+  "contribution to open-source": "contribution_to_open_source",
+  "course automation": "course_automation",
+  "feedback": "feedback",
+}
+
 try {
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
@@ -9,14 +21,17 @@ try {
   const token = core.getInput("repo-token", { required: true });
   const client = new github.GitHub(token);
   const prNr = github.context.payload.pull_request.number;
-  // For test
-  const labels = ["question"];
-  await addLabel(client, prNr);
+  const prTitle = github.context.payload.pull_request.title;
+  await addLabels(client, prNr, prTitle);
 } catch (error) {
   core.setFailed(error.message);
 }
 
-async function addLabel(client, prNr, labels) {
+async function addLabels(client, prNumber, prTitle) {
+  const labels = genLabels();
+  if(labels.length === 0) {
+    return;
+  }
   await client.issues.addLabels({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
@@ -25,20 +40,15 @@ async function addLabel(client, prNr, labels) {
   })
 }
 
-function genLabels(payload, permitted_labels){
-  var labels = [];
-  const title = payload.title;
-  for (label in permitted_labels){
-    if (title.includes(label)){
-      labels.push(label);
+function genLabels(prTitle){
+  prTitle = prTitle.toLowerCase();
+  var labels = []; // labels to be added to PR
+  for(const keyword in label_dict) {
+    if(prTitle.includes(keyword)) {
+      labels.push(label_dict[keyword]);
     }
   }
-  if (labels.length > 0){
-    return labels;
-  }
-  else{
-    return false;
-  }
+  return labels;
 }
 
 function setLabels(labels, payload){
