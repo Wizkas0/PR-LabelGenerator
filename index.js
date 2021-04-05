@@ -1,6 +1,6 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
-const { GitHub } = require('@actions/github/lib/utils');
+const {GitHub, context} = require('@actions/github');
+// const { GitHub } = require('@actions/github/lib/utils');
 
 const label_dict = {
   "test123": "test123", // For testing purposes
@@ -14,20 +14,26 @@ const label_dict = {
   "feedback": "feedback",
 }
 
-try {
+(async () => {
+  try {
   // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
+  const payload = JSON.stringify(context.payload, undefined, 2)
+  // console.log(`The event payload: ${payload}`);
   // Set label
   const token = core.getInput("repo-token", { required: true });
   const client = new GitHub(token);
-  const prNr = github.context.payload.pull_request.number;
-  const prTitle = github.context.payload.pull_request.title;
+  const prNr = context.payload.number;
+  console.log(prNr);
+  const prTitle = context.payload.title;
+  console.log(prTitle);
+  console.log(context.repo.owner);
+  console.log(context.repo.repo);
   //addLabels(client, prNr, prTitle);
-  addLabels(client, 5, prTitle);
-} catch (error) {
+  await addLabels(client, 5, prTitle);
+  } catch (error) {
   core.setFailed(error.message);
-}
+  }
+})();
 
 async function addLabels(client, prNumber, prTitle) {
   const labels = genLabels(prTitle);
