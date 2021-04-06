@@ -1,9 +1,10 @@
 # PR-LabelGenerator
-An action to automatically generate labels for PRs based on the PR title.
+An action to automatically add labels to a pull request, based on its title. 
+The action is triggered when a pull request is made, and labels are added to that pull request.
 
-The labels to be added is based on a key-value mapping which is specified in
-the workflow file. If the title contains the keyword (case insensitive) the 
-value is the corresponding label to be added.
+The labels to be added are based on a key-value mapping which is specified in
+the workflow file. If the title contains the keyword or key-phrase (case insensitive), the 
+corresponding value will be added as a label to the PR.
 
 ## Usage
 ### Workflow file
@@ -20,7 +21,7 @@ jobs:
   Label-PR:
     runs-on: ubuntu-latest
     steps:
-    - uses: Wizkas0/LabelGenAction@main
+    - uses: Wizkas0/LabelGenAction@1.0.1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         keyword-dict: | 
