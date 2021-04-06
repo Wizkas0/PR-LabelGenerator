@@ -37,7 +37,7 @@ the pull request title contains the phrase "crucial bug" or "game-breaking".
 
 ### Inputs
 
-| Name  | Decription  | Required  |
+| Name  | Description  | Required  |
 |---|---|---|
 | repo-token  | Token necessary to allow for label changes. The pre-defined GITHUB_TOKEN is often used.  | Yes  |
 | keyword-dict  | A key-value map in JSON format. | Yes  |
