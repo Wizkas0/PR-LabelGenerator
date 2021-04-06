@@ -1,13 +1,14 @@
-name: 'Automatic Labels'
+name: 'PR-LabelGenerator'
 description: 'Generate labels for pull requests'
+branding:
+  icon: 'check-circle'  
+  color: 'red'
+
 inputs:
   repo-token:
       description: 'The GITHUB_TOKEN repo secret'
   keyword-dict:
       description: 'A dictionary containing keywords and their corresponding labels'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'node12'
   main: 'index.js'
