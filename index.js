@@ -1,25 +1,10 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const key_word_dict_string = core.getInput("keyword-dict", { required: true })
-console.log(key_word_dict_string);
 const label_dict = JSON.parse(key_word_dict_string);
-//{
-//  "test123": "test123", // For testing purposes
-//  "presentation": "presentation",
-//  "essay": "essay",
-//  "demo": "demo",
-//  "executable tutorial": "tutorial",
-//  "open-source contribution": "contribution_to_open_source",
-//  "contribution to open-source": "contribution_to_open_source",
-//  "course automation": "course_automation",
-//  "feedback": "feedback",
-//  "proposal": "proposal",
-//  "submission": "submission",
-//}
 
 async function run() {
   try {
-  console.log(label_dict);
   const token = core.getInput("repo-token", { required: true });
   const client = new github.getOctokit(token);
   const prNr = github.context.payload.number;
@@ -34,9 +19,10 @@ async function run() {
 async function addLabels(client, prNumber, prTitle) {
   const labels = genLabels(prTitle);
   if(labels.length === 0) {
+    console.log("No matchins labels found, exiting");
     return;
   }
-  console.log(labels);
+  console.log("Found matching labels:", labels);
   await client.issues.addLabels({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
