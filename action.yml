@@ -3,7 +3,6 @@ description: 'Generate labels for pull requests'
 branding:
   icon: 'check-circle'  
   color: 'red'
-
 inputs:
   repo-token:
       description: 'The GITHUB_TOKEN repo secret'
