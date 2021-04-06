@@ -31,9 +31,10 @@ jobs:
             "for beginners":"good first issue",
             }
 ```
-
-In this example the label `important` would be added to the pull request if
-the pull request title contains the phrase "crucial bug" or "game-breaking".
+Within the `keyword-dict` input, you can specify the allowed labels for your repository
+and their corresponding keywords. In this example the label `important` would be added to the pull request if
+the pull request title contains the phrase "crucial bug" or "game-breaking". The key-phrase "for beginners" would 
+result in the labels `noob-friendly` and `good first issue` being added to the pull request.
 
 ### Inputs
 
